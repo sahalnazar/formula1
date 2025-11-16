@@ -127,9 +127,9 @@ data class AppTextStyles(
     ),
     val msCaptionMedium: TextStyle = TextStyle(
         fontFamily = Montserrat,
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.Bold,
         fontSize = 12.sp,
-        lineHeight = 18.sp,
+        lineHeight = 16.sp,
         letterSpacing = 0.sp
     ),
 )

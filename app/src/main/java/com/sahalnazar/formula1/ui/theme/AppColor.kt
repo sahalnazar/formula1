@@ -15,6 +15,7 @@ object AppColor {
     val darkGreen = Color(0xff044331)
     val black = Color(0xFF000000)
     val red = Color(0xFFF51A1E)
+    val blue = Color(0xFF3020FD)
 
     val linearGradientBrush = Brush.linearGradient(
         colors = listOf(
