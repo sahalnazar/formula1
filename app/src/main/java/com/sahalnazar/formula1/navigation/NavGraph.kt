@@ -7,9 +7,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.sahalnazar.formula1.ui.screen.HomeScreen
-import com.sahalnazar.formula1.ui.screen.PlaceholderScreen
-import com.sahalnazar.formula1.ui.screen.RaceDetailScreen
+import com.sahalnazar.formula1.ui.screen.home.HomeScreen
+import com.sahalnazar.formula1.ui.screen.placeholder.PlaceholderScreen
+import com.sahalnazar.formula1.ui.screen.racedetails.RaceDetailsScreen
 
 @Composable
 fun NavGraph(
@@ -42,7 +42,7 @@ fun NavGraph(
         }
 
         composable(route = Screen.RaceDetail.route) {
-            RaceDetailScreen()
+            RaceDetailsScreen()
         }
     }
 }

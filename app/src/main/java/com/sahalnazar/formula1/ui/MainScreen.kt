@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.sahalnazar.formula1.navigation.NavGraph
+import com.sahalnazar.formula1.navigation.Screen
 import com.sahalnazar.formula1.ui.component.BottomNavBar
 import com.sahalnazar.formula1.ui.theme.AppTheme
 
@@ -17,6 +18,8 @@ fun MainScreen() {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
+    val routeToTabMapping = mapOf(Screen.RaceDetail.route to Screen.Home.route)
+    val selectedRoute = routeToTabMapping[currentRoute] ?: currentRoute
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -24,7 +27,7 @@ fun MainScreen() {
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {
             BottomNavBar(
-                currentRoute = currentRoute,
+                currentRoute = selectedRoute,
                 onNavigate = { route ->
                     navController.navigate(route) {
                         popUpTo(navController.graph.startDestinationId) {

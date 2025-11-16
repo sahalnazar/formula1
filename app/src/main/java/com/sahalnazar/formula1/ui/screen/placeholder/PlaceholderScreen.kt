@@ -1,4 +1,4 @@
-package com.sahalnazar.formula1.ui.screen
+package com.sahalnazar.formula1.ui.screen.placeholder
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

@@ -34,6 +34,7 @@ fun EducationCard(
         Row(Modifier.fillMaxWidth()) {
             Row(
                 Modifier
+                    .align(Alignment.CenterVertically)
                     .weight(1f)
                     .padding(
                         start = 14.dp,
@@ -58,7 +59,7 @@ fun EducationCard(
                         color = AppTheme.color.white
                     )
                     Text(
-                        "Education", style = AppTheme.textStyles.msCaptionMedium,
+                        "Education", style = AppTheme.textStyles.msHeadingMedium,
                         color = AppTheme.color.white
                     )
                 }

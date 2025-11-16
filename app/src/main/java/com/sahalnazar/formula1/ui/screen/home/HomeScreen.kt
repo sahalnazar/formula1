@@ -1,5 +1,7 @@
-package com.sahalnazar.formula1.ui.screen
+package com.sahalnazar.formula1.ui.screen.home
 
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,18 +13,20 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -104,15 +108,23 @@ fun HomeScreen(navController: NavHostController) {
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 repeat(pagerState.pageCount) { index ->
+                    val isSelected = pagerState.currentPage == index
+                    val width by animateDpAsState(
+                        targetValue = if (isSelected) 24.dp else 4.dp,
+                        animationSpec = tween(durationMillis = 300),
+                        label = "indicator_width"
+                    )
+
                     Box(
                         modifier = Modifier
-                            .size(8.dp)
-                            .clip(CircleShape)
+                            .width(width)
+                            .height(4.dp)
+                            .clip(RoundedCornerShape(2.dp))
                             .background(
-                                if (pagerState.currentPage == index) {
+                                if (isSelected) {
                                     AppTheme.color.white
                                 } else {
-                                    AppTheme.color.white.copy(alpha = 0.3f)
+                                    Color(0xFFE1E1E1)
                                 }
                             )
                     )
