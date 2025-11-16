@@ -6,29 +6,21 @@ import androidx.compose.ui.graphics.Color
 
 object AppColor {
 
-    object Team {
-        val mcLaren = Color(0xffFF5A08)
-    }
+    val mcLaren = Color(0xffFF5A08)
+    val paleYellow = Color(0xffff873a)
+    val white = Color(0xFFFFFFFF)
+    val yellow = Color(0xFFFEE102)
 
-    object TextColor {
-        val paleYellow = Color(0xffff873a)
-        val white = Color(0xFFFFFFFF)
-    }
 
-    object IconColor {
-        val yellow = Color(0xFFFEE102)
-    }
+    val green = Color(0xff86FF0E)
+    val black = Color(0xFF000000)
 
-    object GradientColor {
-
-        val linearGradientBrush = Brush.linearGradient(
-            colors = listOf(
-                TextColor.white,
-                Team.mcLaren
-            ),
-            start = Offset(0f, 0f),
-            end = Offset(0f, Float.POSITIVE_INFINITY)
-        )
-
-    }
+    val linearGradientBrush = Brush.linearGradient(
+        colors = listOf(
+            white,
+            mcLaren
+        ),
+        start = Offset(0f, 0f),
+        end = Offset(0f, Float.POSITIVE_INFINITY)
+    )
 }

@@ -87,7 +87,7 @@ data class AppTextStyles(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Bold,
         fontSize = 16.sp,
-        lineHeight = 18.sp,
+        lineHeight = 20.sp,
         letterSpacing = 0.sp
     ),
     val msBody: TextStyle = TextStyle(

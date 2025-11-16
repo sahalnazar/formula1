@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,7 +19,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sahalnazar.formula1.R
-import com.sahalnazar.formula1.ui.theme.AppColor
 import com.sahalnazar.formula1.ui.theme.AppTheme
 
 data class RiderPageData(
@@ -47,7 +45,7 @@ fun RiderPage(
             modifier = Modifier.padding(top = 18.dp, start = 18.dp),
             text = data.riderName,
             style = AppTheme.textStyles.sgDisplay,
-            color = AppColor.TextColor.paleYellow,
+            color = AppTheme.color.paleYellow,
             overflow = TextOverflow.Clip,
             maxLines = 1
         )
@@ -76,14 +74,7 @@ fun RiderPage(
                 )
         )
 
-        Image(
-            painter = painterResource(R.drawable.ic_get_pro),
-            contentDescription = null,
-            modifier = Modifier
-                .padding(top = 14.dp, start = 18.dp)
-                .size(height = 26.dp, width = 89.dp)
-        )
-
+        GetProBadge(Modifier.padding(top = 14.dp, start = 18.dp))
 
         RiderStats(
             modifier = Modifier
@@ -102,7 +93,7 @@ fun RiderPage(
 @Composable
 fun RiderPagePreview() {
     val data = RiderPageData(
-        bgColor = AppColor.Team.mcLaren,
+        bgColor = AppTheme.color.mcLaren,
         riderName = "Lando Norris",
         riderImage = R.drawable.img_lando_norris,
         riderPos = 18,

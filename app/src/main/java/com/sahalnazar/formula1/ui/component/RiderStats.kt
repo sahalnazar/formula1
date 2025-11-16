@@ -19,8 +19,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sahalnazar.formula1.R
-import com.sahalnazar.formula1.ui.theme.AppColor
-import com.sahalnazar.formula1.ui.theme.AppColor.GradientColor.linearGradientBrush
 import com.sahalnazar.formula1.ui.theme.AppTheme
 import com.sahalnazar.formula1.ui.theme.Formula1Theme
 
@@ -55,15 +53,15 @@ fun RiderStats(
             Text(
                 modifier = Modifier.alignByBaseline(),
                 text = points.toString(),
-                style = AppTheme.textStyles.sgHeadingLarge.copy(brush = linearGradientBrush)
+                style = AppTheme.textStyles.sgHeadingLarge.copy(brush = AppTheme.color.linearGradientBrush)
             )
             Surface(
-                modifier = Modifier.alignByBaseline(), color = AppColor.Team.mcLaren, shape = RoundedCornerShape(5.dp)
+                modifier = Modifier.alignByBaseline(), color = AppTheme.color.mcLaren, shape = RoundedCornerShape(5.dp)
             ) {
                 Text(
                     text = "PTS",
                     style = AppTheme.textStyles.sgBodyMedium,
-                    color = AppColor.TextColor.white,
+                    color = AppTheme.color.white,
                     modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
                 )
             }
@@ -81,13 +79,19 @@ fun RiderCompactStats(
         horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            painter = icon, contentDescription = null, modifier = Modifier.size(16.dp), tint = AppColor.IconColor.yellow
+            painter = icon, contentDescription = null, modifier = Modifier.size(16.dp), tint = AppTheme.color.yellow
         )
         Text(
-            text = value, style = AppTheme.textStyles.sgButtonLarge, color = AppColor.TextColor.white, modifier = Modifier.alignByBaseline()
+            text = value,
+            style = AppTheme.textStyles.sgButtonLarge,
+            color = AppTheme.color.white,
+            modifier = Modifier.alignByBaseline()
         )
         Text(
-            text = title, style = AppTheme.textStyles.sgCaption, color = AppColor.TextColor.white, modifier = Modifier.alignByBaseline()
+            text = title,
+            style = AppTheme.textStyles.sgCaption,
+            color = AppTheme.color.white,
+            modifier = Modifier.alignByBaseline()
         )
     }
 }
@@ -110,7 +114,7 @@ fun RiderStatsPreview() {
     Formula1Theme {
         Box(
             modifier = Modifier
-                .background(AppColor.Team.mcLaren)
+                .background(AppTheme.color.mcLaren)
                 .padding(26.dp)
         ) {
             RiderStats(
@@ -126,7 +130,7 @@ fun RiderCompactStatsPreview() {
     Formula1Theme {
         Box(
             modifier = Modifier
-                .background(AppColor.Team.mcLaren)
+                .background(AppTheme.color.mcLaren)
                 .padding(16.dp)
         ) {
             RiderCompactStats(

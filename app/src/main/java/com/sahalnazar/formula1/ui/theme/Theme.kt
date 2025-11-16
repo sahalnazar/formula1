@@ -11,13 +11,17 @@ object AppTheme {
     val textStyles: AppTextStyles
         @Composable
         get() = LocalAppTextStyles.current
+
+    val color = AppColor
 }
 
 @Composable
 fun Formula1Theme(
     content: @Composable () -> Unit,
 ) {
-    CompositionLocalProvider(LocalAppTextStyles provides CustomAppTextStyles) {
+    CompositionLocalProvider(
+        LocalAppTextStyles provides CustomAppTextStyles
+    ) {
         MaterialTheme(
             content = content
         )
