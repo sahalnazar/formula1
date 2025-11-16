@@ -24,13 +24,12 @@ import com.sahalnazar.formula1.ui.theme.Formula1Theme
 data class UpcomingRaceCardData(
     val name: String,
     val date: String,
-    val time: Time,
-    val location: String,
+    val raceTime: RaceTime,
     @DrawableRes
     val circuitImage: Int,
 )
 
-data class Time(
+data class RaceTime(
     val time: String,
     val amOrPm: String,
 )
@@ -87,13 +86,13 @@ fun UpcomingRaceCard(
             ) {
                 Text(
                     modifier = Modifier.alignByBaseline(),
-                    text = upcomingRaceCardData.time.time,
+                    text = upcomingRaceCardData.raceTime.time,
                     style = AppTheme.textStyles.sgHeadingMedium,
                     color = AppTheme.color.white
                 )
                 Text(
                     modifier = Modifier.alignByBaseline(),
-                    text = upcomingRaceCardData.time.amOrPm,
+                    text = upcomingRaceCardData.raceTime.amOrPm,
                     style = AppTheme.textStyles.sgCaptionMedium,
                     color = AppTheme.color.white
                 )
@@ -110,11 +109,10 @@ fun UpcomingRaceCardPreview() {
             upcomingRaceCardData = UpcomingRaceCardData(
                 name = "FP1",
                 date = "04 Friday",
-                time = Time(
+                raceTime = RaceTime(
                     time = "5:00",
                     amOrPm = "PM"
                 ),
-                location = "Yas Marina Circuit",
                 circuitImage = R.drawable.ic_circuit
             )
         )
