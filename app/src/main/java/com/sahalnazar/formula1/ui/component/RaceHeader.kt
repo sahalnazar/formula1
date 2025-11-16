@@ -19,10 +19,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.sahalnazar.formula1.R
+import com.sahalnazar.formula1.ui.screen.racedetails.RaceHeaderUiData
 import com.sahalnazar.formula1.ui.theme.AppTheme
 
 @Composable
-fun RaceHeader(modifier: Modifier = Modifier) {
+fun RaceHeader(
+    uiData: RaceHeaderUiData?,
+    modifier: Modifier = Modifier
+) {
     Box(
         modifier = modifier.fillMaxWidth()
     ) {
@@ -55,19 +59,19 @@ fun RaceHeader(modifier: Modifier = Modifier) {
 
                 Column(Modifier.weight(1f)) {
                     RaceInfo(
-                        round = "Round 12",
-                        raceName = "São Paulo GP",
-                        location = "São Paulo",
-                        dateRange = "23 - 30 April"
+                        round = uiData?.round ?: "Round --",
+                        raceName = uiData?.raceName ?: "No Race",
+                        location = uiData?.location ?: "--",
+                        dateRange = uiData?.dateRange ?: "--"
                     )
 
                     Spacer(modifier = Modifier.height(30.dp))
 
                     StartsInTimer(
-                        title = "FP1 Starts in",
-                        days = "07",
-                        hours = "16",
-                        minutes = "42"
+                        title = "${uiData?.nextSessionName ?: "Session"} Starts in",
+                        days = uiData?.daysUntil ?: "00",
+                        hours = uiData?.hoursUntil ?: "00",
+                        minutes = uiData?.minutesUntil ?: "00"
                     )
                 }
 

@@ -24,32 +24,46 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.sahalnazar.formula1.R
 import com.sahalnazar.formula1.navigation.Screen
 import com.sahalnazar.formula1.ui.component.DistanceCoveredCard
 import com.sahalnazar.formula1.ui.component.EducationCard
 import com.sahalnazar.formula1.ui.component.InstagramCard
+import com.sahalnazar.formula1.ui.component.LoadingIndicator
 import com.sahalnazar.formula1.ui.component.MoreThanJustAnAppPage
 import com.sahalnazar.formula1.ui.component.RaceTime
 import com.sahalnazar.formula1.ui.component.RiderPage
 import com.sahalnazar.formula1.ui.component.RiderPageData
 import com.sahalnazar.formula1.ui.component.UpcomingRaceCard
 import com.sahalnazar.formula1.ui.component.UpcomingRaceCardData
+import com.sahalnazar.formula1.ui.screen.racedetails.RaceDetailViewModel
 import com.sahalnazar.formula1.ui.theme.AppTheme
 import com.sahalnazar.formula1.util.UrlUtils
 import kotlinx.coroutines.delay
 
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun HomeScreen(
+    navController: NavHostController,
+    viewModel: HomeViewModel = hiltViewModel(),
+    raceDetailViewModel: RaceDetailViewModel = hiltViewModel()
+) {
     val context = LocalContext.current
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val pagerState = rememberPagerState(pageCount = { 2 })
+
+    if (uiState.isLoading) {
+        LoadingIndicator()
+        return
+    }
 
     LaunchedEffect(pagerState) {
         while (true) {
@@ -77,17 +91,19 @@ fun HomeScreen(navController: NavHostController) {
             ) { page ->
                 when (page) {
                     0 -> {
-                        RiderPage(
-                            modifier = Modifier.fillMaxSize(),
-                            data = RiderPageData(
-                                bgColor = AppTheme.color.mcLaren,
-                                riderName = "Lando Norris",
-                                riderImage = R.drawable.img_lando_norris,
-                                riderPos = 2,
-                                riderWins = 4,
-                                riderPts = 374
+                        uiState.topDriver?.let { driver ->
+                            RiderPage(
+                                modifier = Modifier.fillMaxSize(),
+                                data = RiderPageData(
+                                    bgColor = AppTheme.color.mcLaren,
+                                    riderName = "${driver.firstName} ${driver.lastName}",
+                                    riderImage = R.drawable.img_lando_norris,
+                                    riderPos = driver.position,
+                                    riderWins = driver.wins,
+                                    riderPts = driver.points
+                                )
                             )
-                        )
+                        }
                     }
 
                     1 -> {
@@ -142,22 +158,38 @@ fun HomeScreen(navController: NavHostController) {
                     .height(IntrinsicSize.Max),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                UpcomingRaceCard(
+                uiState.upcomingSessionUiData?.let { sessionData ->
+                    UpcomingRaceCard(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight(),
+                        upcomingRaceCardData = UpcomingRaceCardData(
+                            name = sessionData.sessionName,
+                            date = sessionData.date,
+                            raceTime = sessionData.raceTime,
+                            circuitImage = R.drawable.ic_circuit
+                        ),
+                        onClick = {
+                            uiState.upcomingRace?.let { race ->
+                                raceDetailViewModel.setSelectedRace(race)
+                                navController.navigate(Screen.RaceDetail.route)
+                            }
+                        }
+                    )
+                } ?: UpcomingRaceCard(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight(),
                     upcomingRaceCardData = UpcomingRaceCardData(
-                        name = "FP1",
-                        date = "22 Friday",
+                        name = "No upcoming session",
+                        date = "--",
                         raceTime = RaceTime(
-                            time = "5:00",
-                            amOrPm = "PM"
+                            time = "--",
+                            amOrPm = ""
                         ),
                         circuitImage = R.drawable.ic_circuit
                     ),
-                    onClick = {
-                        navController.navigate(Screen.RaceDetail.route)
-                    }
+                    onClick = {}
                 )
 
                 Column(
