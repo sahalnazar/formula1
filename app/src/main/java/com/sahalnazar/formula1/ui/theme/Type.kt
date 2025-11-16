@@ -60,11 +60,25 @@ data class AppTextStyles(
         lineHeight = 14.sp,
         letterSpacing = 0.sp
     ),
+    val sgBodyNormal: TextStyle = TextStyle(
+        fontFamily = SpaceGrotesk,
+        fontWeight = FontWeight.Bold,
+        fontSize = 12.sp,
+        lineHeight = 14.sp,
+        letterSpacing = 0.sp
+    ),
     val sgCaption: TextStyle = TextStyle(
         fontFamily = SpaceGrotesk,
         fontWeight = FontWeight.Medium,
         fontSize = 10.sp,
         lineHeight = 9.sp,
+        letterSpacing = 0.sp
+    ),
+    val sgCaptionMedium: TextStyle = TextStyle(
+        fontFamily = SpaceGrotesk,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp,
+        lineHeight = 36.sp,
         letterSpacing = 0.sp
     ),
 
