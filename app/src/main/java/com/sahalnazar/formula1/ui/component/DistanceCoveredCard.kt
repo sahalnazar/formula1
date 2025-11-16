@@ -45,7 +45,9 @@ fun DistanceCoveredCard(
         color = Color.Transparent
     ) {
         Box(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
         ) {
             Spacer(
                 modifier = Modifier

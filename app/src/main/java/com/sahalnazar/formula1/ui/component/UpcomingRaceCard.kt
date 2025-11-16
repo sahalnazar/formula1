@@ -38,11 +38,13 @@ data class RaceTime(
 fun UpcomingRaceCard(
     modifier: Modifier = Modifier,
     upcomingRaceCardData: UpcomingRaceCardData,
+    onClick: () -> Unit = {}
 ) {
     Surface(
         modifier = modifier,
         shape = RoundedCornerShape(16.dp),
-        color = AppTheme.color.darkGreen
+        color = AppTheme.color.darkGreen,
+        onClick = onClick
     ) {
         Column(
             modifier = Modifier.padding(12.dp),
