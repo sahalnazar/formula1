@@ -20,6 +20,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -38,7 +39,7 @@ import com.sahalnazar.formula1.navigation.Screen
 import com.sahalnazar.formula1.ui.component.DistanceCoveredCard
 import com.sahalnazar.formula1.ui.component.EducationCard
 import com.sahalnazar.formula1.ui.component.InstagramCard
-import com.sahalnazar.formula1.ui.component.LoadingIndicator
+import com.sahalnazar.formula1.ui.component.ExpressiveLoadingIndicator
 import com.sahalnazar.formula1.ui.component.MoreThanJustAnAppPage
 import com.sahalnazar.formula1.ui.component.RaceTime
 import com.sahalnazar.formula1.ui.component.RiderPage
@@ -50,6 +51,7 @@ import com.sahalnazar.formula1.ui.theme.AppTheme
 import com.sahalnazar.formula1.util.UrlUtils
 import kotlinx.coroutines.delay
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun HomeScreen(
     navController: NavHostController,
@@ -61,7 +63,7 @@ fun HomeScreen(
     val pagerState = rememberPagerState(pageCount = { 2 })
 
     if (uiState.isLoading) {
-        LoadingIndicator()
+        ExpressiveLoadingIndicator()
         return
     }
 
